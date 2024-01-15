@@ -1,60 +1,170 @@
 <odoo>
-  <data>
-    <!-- explicit list view definition -->
-<!--
-    <record model="ir.ui.view" id="escuelas_vela.list">
-      <field name="name">EscuelasVela list</field>
-      <field name="model">escuelas_vela.escuelas_vela</field>
-      <field name="arch" type="xml">
-        <tree>
-          <field name="name"/>
-          <field name="value"/>
-          <field name="value2"/>
-        </tree>
-      </field>
-    </record>
--->
+    <data>
 
-    <!-- actions opening views on models -->
-<!--
-    <record model="ir.actions.act_window" id="escuelas_vela.action_window">
-      <field name="name">EscuelasVela window</field>
-      <field name="res_model">escuelas_vela.escuelas_vela</field>
-      <field name="view_mode">tree,form</field>
-    </record>
--->
+          <record id="menu_root" model="ir.ui.menu">
+            <field name="name">Escuelas de Vela</field>
+          </record>
 
-    <!-- server action to the one above -->
-<!--
-    <record model="ir.actions.server" id="escuelas_vela.action_server">
-      <field name="name">EscuelasVela server</field>
-      <field name="model_id" ref="model_escuelas_vela_escuelas_vela"/>
-      <field name="state">code</field>
-      <field name="code">
-        action = {
-          "type": "ir.actions.act_window",
-          "view_mode": "tree,form",
-          "res_model": model._name,
-        }
-      </field>
-    </record>
--->
+          <record model="ir.actions.act_window" id="action_alumno">
+            <field name="name">Alumnos de Vela</field>
+            <field name="res_model">escuelas_vela.alumno</field>
+            <field name="view_mode">tree,form</field>
+        </record>
 
-    <!-- Top menu item -->
-<!--
-    <menuitem name="EscuelasVela" id="escuelas_vela.menu_root"/>
--->
-    <!-- menu categories -->
-<!--
-    <menuitem name="Menu 1" id="escuelas_vela.menu_1" parent="escuelas_vela.menu_root"/>
-    <menuitem name="Menu 2" id="escuelas_vela.menu_2" parent="escuelas_vela.menu_root"/>
--->
-    <!-- actions -->
-<!--
-    <menuitem name="List" id="escuelas_vela.menu_1_list" parent="escuelas_vela.menu_1"
-              action="escuelas_vela.action_window"/>
-    <menuitem name="Server to list" id="escuelas_vela" parent="escuelas_vela.menu_2"
-              action="escuelas_vela.action_server"/>
--->
-  </data>
+
+        <!-- Vistas y acciones para el modelo Escuela -->
+        <record model="ir.ui.view" id="view_escuela_tree">
+            <field name="name">escuelas_vela.escuela.tree</field>
+            <field name="model">escuelas_vela.escuela</field>
+            <field name="arch" type="xml">
+                <tree>
+                    <field name="name"/>
+                    <field name="logotipo"/>
+                    <field name="direccion"/>
+                    <field name="telefono"/>
+                    <field name="email"/>
+                </tree>
+            </field>
+        </record>
+
+        <record model="ir.ui.view" id="view_escuela_form">
+            <field name="name">escuelas_vela.escuela.form</field>
+            <field name="model">escuelas_vela.escuela</field>
+            <field name="arch" type="xml">
+                <form>
+                    <group colspan="2" col="2">
+                        <field name="name"/>
+                        <field name="logotipo"/>
+                        <field name="direccion"/>
+                        <field name="telefono"/>
+                        <field name="email"/>
+                    </group>
+                </form>
+            </field>
+        </record>
+
+        <record model="ir.actions.act_window" id="action_escuela">
+            <field name="name">Escuelas de Vela</field>
+            <field name="res_model">escuelas_vela.escuela</field>
+            <field name="view_mode">tree,form</field>
+        </record>
+
+        <menuitem name="Escuelas de Vela" id="menu_escuela" parent="menu_root" action="action_escuela"/>
+
+        <!-- Vistas y acciones para el modelo Curso -->
+        <record model="ir.ui.view" id="view_curso_tree">
+            <field name="name">escuelas_vela.curso.tree</field>
+            <field name="model">escuelas_vela.curso</field>
+            <field name="arch" type="xml">
+                <tree>
+                    <field name="title"/>
+                    <field name="duracion_dias"/>
+                    <field name="duracion_horas"/>
+                    <field name="precio"/>
+                    <field name="escuela_id"/>
+                </tree>
+            </field>
+        </record>
+
+        <record model="ir.ui.view" id="view_curso_form">
+            <field name="name">escuelas_vela.curso.form</field>
+            <field name="model">escuelas_vela.curso</field>
+            <field name="arch" type="xml">
+                <form>
+                    <group colspan="2" col="2">
+                        <field name="title"/>
+                        <field name="duracion_dias"/>
+                        <field name="duracion_horas"/>
+                        <field name="precio"/>
+                        <field name="escuela_id"/>
+                    </group>
+                </form>
+            </field>
+        </record>
+
+        <record model="ir.actions.act_window" id="action_curso">
+            <field name="name">Cursos de Vela</field>
+            <field name="res_model">escuelas_vela.curso</field>
+            <field name="view_mode">tree,form</field>
+        </record>
+
+        <menuitem name="Cursos de Vela" id="menu_curso" parent="menu_root" action="action_curso"/>
+
+        <!-- Vistas y acciones para el modelo Monitor -->
+        <record model="ir.ui.view" id="view_monitor_tree">
+            <field name="name">escuelas_vela.monitor.tree</field>
+            <field name="model">escuelas_vela.monitor</field>
+            <field name="arch" type="xml">
+                <tree>
+                    <field name="name"/>
+                    <field name="telefono"/>
+                    <field name="email"/>
+                    <field name="direccion"/>
+                    <field name="codigo_identificacion"/>
+                    <field name="escuela_ids"/>
+                </tree>
+            </field>
+        </record>
+
+        <record model="ir.ui.view" id="view_monitor_form">
+            <field name="name">escuelas_vela.monitor.form</field>
+            <field name="model">escuelas_vela.monitor</field>
+            <field name="arch" type="xml">
+                <form>
+                    <group colspan="2" col="2">
+                        <field name="name"/>
+                        <field name="telefono"/>
+                        <field name="email"/>
+                        <field name="direccion"/>
+                        <field name="codigo_identificacion"/>
+                        <field name="escuela_ids"/>
+                    </group>
+                </form>
+            </field>
+        </record>
+
+        <record model="ir.actions.act_window" id="action_monitor">
+            <field name="name">Monitores de Vela</field>
+            <field name="res_model">escuelas_vela.monitor</field>
+            <field name="view_mode">tree,form</field>
+        </record>
+
+        <menuitem name="Monitores de Vela" id="menu_monitor" parent="menu_root" action="action_monitor"/>
+
+        <!-- Vistas y acciones para el modelo Alumno -->
+        <record model="ir.ui.view" id="view_alumno_tree">
+            <field name="name">escuelas_vela.alumno.tree</field>
+            <field name="model">escuelas_vela.alumno</field>
+            <field name="arch" type="xml">
+                <tree>
+                    <field name="name"/>
+                    <field name="telefono"/>
+                    <field name="email"/>
+                    <field name="direccion"/>
+                    <field name="numero_matricula"/>
+                    <field name="escuela_id"/>
+                </tree>
+            </field>
+        </record>
+
+        <record model="ir.ui.view" id="view_alumno_form">
+            <field name="name">escuelas_vela.alumno.form</field>
+            <field name="model">escuelas_vela.alumno</field>
+            <field name="arch" type="xml">
+                <form>
+                    <group colspan="2" col="2">
+                        <field name="name"/>
+                        <field name="telefono"/>
+                        <field name="email"/>
+                        <field name="direccion"/>
+                        <field name="numero_matricula"/>
+                        <field name="escuela_id"/>
+                    </group>
+                </form>
+            </field>
+        </record>
+
+        <menuitem name="Alumnos de Vela" id="menu_alumno" parent="menu_root" action="action_alumno"/>
+
+    </data>
 </odoo>
